@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "better-events": "^3.0.5",
     "codeclimate-test-reporter": "^0.5.0",
     "eslint": "^4.7.1",
     "eslint-config-ultra": "^0.4.5",
@@ -44,7 +45,6 @@
     "nyc": "^11.2.1"
   },
   "dependencies": {
-    "better-events": "^3.0.5",
     "socket-json-wrapper": "^0.0.2"
   }
 }
