@@ -1,7 +1,7 @@
 {
-  "name": "remote-events",
+  "name": "revents",
   "version": "0.0.0",
-  "description": "...",
+  "description": "Connect two EventEmitters via a socket.",
   "main": "index.js",
   "scripts": {
     "test": "rm -f test-socket && rm -rf coverage && nyc mocha",
@@ -12,21 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robojones/remote-events.git"
+    "url": "git+https://github.com/robojones/revents.git"
   },
   "keywords": [
     "socket",
     "connection",
-    "json",
-    "task",
-    "job"
+    "events",
+    "eventemitter",
+    "emitter"
   ],
   "author": "robojones",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/robojones/remote-events/issues"
+    "url": "https://github.com/robojones/revents/issues"
   },
-  "homepage": "https://github.com/robojones/remote-events#readme",
+  "homepage": "https://github.com/robojones/revents#readme",
   "nyc": {
     "exclude": [
       "test/*"
