@@ -1,5 +1,7 @@
 # revents
 
+Connect two EventEmitters via a socket.
+
 [![Build Status](https://circleci.com/gh/robojones/revents.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/robojones/revents/tree/master)
 [![Test Coverage](https://codeclimate.com/github/robojones/revents/badges/coverage.svg)](https://codeclimate.com/github/robojones/revents/coverage)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
