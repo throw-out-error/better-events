@@ -1,6 +1,6 @@
 {
   "name": "revents",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Connect two EventEmitters via a socket.",
   "main": "index.js",
   "scripts": {
