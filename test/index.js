@@ -52,5 +52,42 @@ describe('socket-json-wrapper', function () {
 
       assert(result, 'invalid event was emitted.')
     })
+
+    it('should transfer errors without losing any information', async function () {
+      const originalError = new TypeError('bad error')
+      originalError.code = 'BAD_ERR'
+
+      this.client.remoteEmit('error', originalError)
+
+      try {
+        await this.server.once('error')
+      } catch (error) {
+        assert(error instanceof TypeError, 'is not an instance of TypeError')
+        assert.strictEqual(error.message, originalError.message)
+        assert.strictEqual(error.code, originalError.code)
+
+        return
+      }
+
+      throw new Error('Error was not thrown.')
+    })
+
+    it('should reassemble errors as a default Error if the name is unknown', async function () {
+      const originalError = new TypeError('bad error')
+      originalError.name = 'UnknownErrorClass'
+
+      this.client.remoteEmit('error', originalError)
+
+      try {
+        await this.server.once('error')
+      } catch (error) {
+        assert.strictEqual(error.message, originalError.message)
+        assert.strictEqual(error.name, originalError.name)
+
+        return
+      }
+
+      throw new Error('Error was not thrown.')
+    })
   })
 })
