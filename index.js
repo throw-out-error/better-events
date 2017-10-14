@@ -11,10 +11,31 @@ class RemoteEventEmitter extends Connection {
   constructor(socket) {
     super(socket)
 
-    this.on('message', ({ type, event, args }) => {
-      if (type === 'event') {
-        super.emit(event, ...args)
+    this.on('message', msg => {
+      const { type } = msg
+
+      if (type !== 'event') {
+        return
       }
+
+      const { event } = msg
+
+      if (event === 'error') {
+        const { name, message, stack, custom } = msg
+
+        const Constructor = global[name] || Error
+
+        // reassemble error
+        const error = new Constructor(message)
+        error.stack = stack
+        Object.assign(error, custom)
+
+        return this.emit(event, error)
+      }
+
+      const { args } = msg
+
+      this.emit(event, ...args)
     })
   }
 
@@ -25,6 +46,23 @@ class RemoteEventEmitter extends Connection {
    * @returns {boolean}
    */
   remoteEmit(event, ...args) {
+    if (event === 'error' && args[0] instanceof Error) {
+      const error = args[0]
+
+      // disassemble error
+      const { name, message, stack } = error
+      const custom = Object.assign({}, error)
+
+      return this.send({
+        type: 'event',
+        event,
+        name,
+        message,
+        stack,
+        custom
+      })
+    }
+
     return this.send({
       type: 'event',
       event,
