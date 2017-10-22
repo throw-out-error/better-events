@@ -1849,9 +1849,9 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
-socket-json-wrapper@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/socket-json-wrapper/-/socket-json-wrapper-0.0.2.tgz#bdfbf57d11951174031f6c37b1c6da4bb8d2736f"
+socket-json-wrapper@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/socket-json-wrapper/-/socket-json-wrapper-1.0.0.tgz#2b7b98c59883235be17e797c96aeb24a739f5191"
   dependencies:
     better-events "^3.0.5"
 

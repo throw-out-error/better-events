@@ -45,6 +45,6 @@
     "nyc": "^11.2.1"
   },
   "dependencies": {
-    "socket-json-wrapper": "^0.0.2"
+    "socket-json-wrapper": "^1.0.0"
   }
 }
