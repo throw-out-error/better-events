@@ -89,5 +89,20 @@ describe('socket-json-wrapper', function () {
 
       throw new Error('Error was not thrown.')
     })
+
+    it('should be able to transmit strings if they are emitted as "error"', async function () {
+      const errorString = 'bad error'
+
+      this.client.remoteEmit('error', errorString)
+
+      try {
+        await this.server.once('error')
+      } catch (string) {
+        assert.strictEqual(string, errorString)
+        return
+      }
+
+      throw new Error('Error was not thrown.')
+    })
   })
 })
