@@ -18,9 +18,9 @@ class RemoteEventEmitter extends Connection {
         return
       }
 
-      const { event } = msg
+      const { event, args } = msg
 
-      if (event === 'error') {
+      if (event === 'error' && !args) {
         const { name, message, stack, custom } = msg
 
         const Constructor = global[name] || Error
@@ -32,8 +32,6 @@ class RemoteEventEmitter extends Connection {
 
         return this.emit(event, error)
       }
-
-      const { args } = msg
 
       this.emit(event, ...args)
     })
