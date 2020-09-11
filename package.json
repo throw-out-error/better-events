@@ -1,6 +1,6 @@
 {
     "name": "@throw-out-error/better-events",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "description": "Better event emitters.",
     "main": "index.js",
     "scripts": {
