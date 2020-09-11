@@ -24,4 +24,4 @@ jobs:
 
             - uses: creepinson/pnpm-action@master
               with:
-                  arguments: '["install", "run build", "run lint"]'
+                  arguments: '["install", "build", "lint"]'
