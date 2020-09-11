@@ -8,6 +8,7 @@
         "test": "rm -f test-socket && rm -rf coverage && nyc mocha",
         "lint": "eslint src/**/* --fix",
         "build": "tsc",
+        "deploy": "pnpm publish --access=public",
         "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test"
     },
     "engines": {
