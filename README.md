@@ -21,8 +21,8 @@ npm i revents
 In the `server.js` file:
 
 ```javascript
-const { RemoteEventEmitter: Connection } = require('revents')
-const net = require('net')
+import { RemoteEventEmitter: Connection } = require('revents')
+const net  from 'net'
 
 const server = net.createServer(socket => {
   const connection = new Connection(socket)
@@ -40,8 +40,8 @@ server.listen(8080)
 In the `client.js` file:
 
 ```javascript
-const { RemoteEventEmitter } = require('revents')
-const net = require('net')
+import { RemoteEventEmitter } = require('revents')
+const net  from 'net'
 
 const socket = net.connect(8080)
 const connection = new Connection(socket)

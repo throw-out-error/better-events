@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es2019",
+        "module": "commonjs",
+        "lib": ["ES2020"],
+        "moduleResolution": "node",
+        "declaration": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "outDir": "dist",
+        "strictFunctionTypes": false,
+        "strictBindCallApply": false,
+        "typeRoots": ["node_modules/@types", "src/lib"]
+    }
+}

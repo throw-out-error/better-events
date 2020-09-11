@@ -1,50 +1,56 @@
 {
-  "name": "revents",
-  "version": "1.0.2",
-  "description": "Connect two EventEmitters via a socket.",
-  "main": "index.js",
-  "scripts": {
-    "test": "rm -f test-socket && rm -rf coverage && nyc mocha",
-    "lint": "node_modules/eslint/bin/eslint.js ."
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/robojones/revents.git"
-  },
-  "keywords": [
-    "socket",
-    "connection",
-    "events",
-    "eventemitter",
-    "emitter"
-  ],
-  "author": "robojones",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/robojones/revents/issues"
-  },
-  "homepage": "https://github.com/robojones/revents#readme",
-  "nyc": {
-    "exclude": [
-      "test/*"
+    "name": "@throw-out-error/better-events",
+    "version": "1.0.2",
+    "description": "Better event emitters.",
+    "main": "index.js",
+    "scripts": {
+        "test": "rm -f test-socket && rm -rf coverage && nyc mocha",
+        "lint": "eslint src/**/* --fix",
+        "build": "tsc",
+        "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/throw-out-error/better-events.git"
+    },
+    "keywords": [
+        "socket",
+        "connection",
+        "events",
+        "eventemitter",
+        "emitter"
     ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ]
-  },
-  "devDependencies": {
-    "better-events": "^3.0.5",
-    "codeclimate-test-reporter": "^0.5.0",
-    "eslint": "^4.7.1",
-    "eslint-config-ultra": "^0.4.5",
-    "mocha": "^4.0.0",
-    "nyc": "^11.2.1"
-  },
-  "dependencies": {
-    "socket-json-wrapper": "^1.0.0"
-  }
+    "author": "Throw Out Error",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/throw-out-error/better-events/issues"
+    },
+    "homepage": "https://github.com/throw-out-error/better-events#readme",
+    "nyc": {
+        "exclude": [
+            "test/*"
+        ],
+        "reporter": [
+            "lcov",
+            "text-summary"
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^14.10.0",
+        "@typescript-eslint/eslint-plugin": "^4.1.0",
+        "@typescript-eslint/parser": "^4.1.0",
+        "codeclimate-test-reporter": "^0.5.1",
+        "eslint": "^7.8.1",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "mocha": "^8.1.3",
+        "nyc": "^15.1.0",
+        "prettier": "^2.1.1"
+    },
+    "dependencies": {
+        "typescript": "^4.0.2"
+    }
 }
