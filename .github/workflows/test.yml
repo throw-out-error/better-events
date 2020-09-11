@@ -24,4 +24,4 @@ jobs:
 
             - uses: creepinson/pnpm-action@master
               with:
-                  arguments: '["install", "test"]'
+                  arguments: '["install", "build", "test"]'
