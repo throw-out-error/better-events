@@ -1,9 +1,12 @@
 {
     "name": "@throw-out-error/better-events",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Better event emitters.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "test": "rm -f test-socket && rm -rf coverage && nyc mocha",
         "lint": "eslint src/**/* --fix",
