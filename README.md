@@ -6,8 +6,16 @@ Better event emitters.
 
 ## Installation
 
-```
+### NPM
+
+```bash
 npm i @throw-out-error/better-events
+```
+
+### Yarn
+
+```bash
+yarn add @throw-out-error/better-events
 ```
 
 ## Example
@@ -15,13 +23,11 @@ npm i @throw-out-error/better-events
 In the `server.js` file:
 
 ```javascript
-const {
-    RemoteEventEmitter: Connection,
-} = require("@throw-out-error/better-events");
+const { RemoteEventEmitter } = require("@throw-out-error/better-events");
 const net = require("net");
 
 const server = net.createServer((socket) => {
-    const connection = new Connection(socket);
+    const connection = new RemoteEventEmitter(socket);
 
     connection.remoteEmit("ping");
 
@@ -40,18 +46,18 @@ const { RemoteEventEmitter } = require('@throw-out-error/better-events')
 const net = require('net')
 
 const socket = net.connect(8080)
-const connection = new Connection(socket)
+const connection = new RemoteEventEmitter(socket)
 
 connection.remoteEmit('pong')
 
 connection.on('ping', () => {
-  console.log('ping')
+    console.log('ping')
 }
 ```
 
 ## API
 
-The `RemoteEventEmitter` extends the `Connection` class from the [socket-json-wrapper package](https://www.npmjs.com/package/socket-json-wrapper).
+The `RemoteEventEmitter` extends the `Connection` class.
 This means that you can use the [send method](https://www.npmjs.com/package/socket-json-wrapper#connectionsenddata) and the `"message"` event.
 
 ### emitter.remoteEmit(event, ...args)
