@@ -3,6 +3,6 @@ declare module "events" {
         once(
             event: string | symbol,
             listener: (...args: unknown[]) => void,
-        ): any;
+        ): unknown;
     }
 }
