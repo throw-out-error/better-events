@@ -1,5 +1,5 @@
 import net from "net";
-import { RemoteEventEmitter, toRx } from ".";
+import { RemoteEventEmitter } from ".";
 
 async function main() {
     const _server = net

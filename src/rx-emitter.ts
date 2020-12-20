@@ -1,15 +1,15 @@
 import { EventEmitter } from "events";
 import { Subject, BehaviorSubject, Subscription, Observable } from "rxjs";
 
-export function toRx(emitter: EventEmitter) {
+/*export function toRx(emitter: EventEmitter) {
     const rx = new RxEmitter();
 
-    emitter.eventNames().forEach((e: string) => {
-        emitter.on(e, (args) => rx.emit(e, args));
-    });
+    emitter
+        .eventNames()
+        .forEach((e: string) => emitter.on(e, (args) => rx.emit(e, args)));
 
     return rx;
-}
+}*/
 
 export type Pipeable<T> = {
     observable: Observable<T>;
@@ -21,7 +21,7 @@ export class RxEmitter {
      * Hash map of subjects
      * @type {Subject}
      */
-    private subjects: { [key: string]: Subject<any> } = {};
+    private subjects: { [key: string]: Subject<unknown> } = {};
 
     /**
      * Constructor
@@ -32,14 +32,14 @@ export class RxEmitter {
     /**
      * Emits events through a subject to all subscribed broadcaster
      * @param name {string} Name of an event
-     * @param data {any} Event data
+     * @param data {unknown} Event data
      */
-    emit(name: string, data?: any): RxEmitter {
-        if (typeof this.subjects[name] === "undefined") {
+    emit(name: string, data?: unknown): RxEmitter {
+        if (typeof this.subjects[name] === "undefined")
             this.subjects[name] = this.immediate
                 ? new Subject()
                 : new BehaviorSubject(null);
-        }
+
         this.subjects[name].next(data);
         return this;
     }
@@ -47,17 +47,17 @@ export class RxEmitter {
     /**
      * Subscribes a Observer (listener) to an event.
      * @param name {string} Name of an event
-     * @param handler {any} Callback of the listener (subscriber)
+     * @param handler {unknown} Callback of the listener (subscriber)
      * @returns {Subscription}
      */
     on<T>(name: string, handler?: RxEmitterFunction<T>): Pipeable<T> {
-        if (typeof this.subjects[name] === "undefined") {
+        if (typeof this.subjects[name] === "undefined")
             this.subjects[name] = this.immediate
                 ? new Subject()
                 : new BehaviorSubject(null);
-        }
+
         return {
-            observable: this.subjects[name],
+            observable: this.subjects[name] as Observable<T>,
             subscription: this.subjects[name].subscribe(handler),
         };
     }
@@ -65,15 +65,15 @@ export class RxEmitter {
     /**
      * Subscribes a Observer (listener) to an event.
      * @param name {string} Name of an event
-     * @param handler {any} Callback of the listener (subscriber)
+     * @param handler {unknown} Callback of the listener (subscriber)
      * @returns {Subscription}
      */
     once<T>(name: string, handler?: RxEmitterFunction<T>): Pipeable<T> {
-        if (typeof this.subjects[name] === "undefined") {
+        if (typeof this.subjects[name] === "undefined")
             this.subjects[name] = this.immediate
                 ? new Subject()
                 : new BehaviorSubject(null);
-        }
+
         const observer = this.subjects[name].subscribe({
             ...handler,
             complete: () => {
@@ -82,7 +82,7 @@ export class RxEmitter {
             },
         });
         return {
-            observable: this.subjects[name],
+            observable: this.subjects[name] as Observable<T>,
         };
     }
 
@@ -102,13 +102,10 @@ export class RxEmitter {
      * Clean up all Observers and clean up map of Subjects
      */
     disposeAll(): RxEmitter {
-        var subjects = this.subjects;
-        var hasOwnProp: Function = {}.hasOwnProperty;
-        for (var prop in subjects) {
-            if (hasOwnProp.call(subjects, prop)) {
-                subjects[prop].unsubscribe();
-            }
-        }
+        const subjects = this.subjects;
+        const hasOwnProp = {}.hasOwnProperty;
+        for (const prop in subjects)
+            if (hasOwnProp.call(subjects, prop)) subjects[prop].unsubscribe();
 
         this.subjects = {};
         return this;
@@ -128,14 +125,14 @@ export type RxEmitterFunction<T> =
     | CompletionObserver;
 
 export function isCompletionObserver<T>(
-    fn: RxEmitterFunction<T>,
+    fn: RxEmitterFunction<T>
 ): fn is CompletionObserver {
     const argTypes: Parameters<typeof fn> = null;
     return argTypes[0][0] === undefined;
 }
 
 export function isErrorObserver<T>(
-    fn: RxEmitterFunction<T>,
+    fn: RxEmitterFunction<T>
 ): fn is ErrorObserver {
     const argTypes: Parameters<typeof fn> = null;
     return argTypes[0][0] && argTypes[0][0] instanceof Error;

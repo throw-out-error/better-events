@@ -10,13 +10,12 @@ import { verifyEventEmitter } from "./verifyEventEmitter";
  * @param {string} eventName - The name of the event.
  * @param {*} source - The EventEmitter that emits the event.
  * @param {*} target - The EventEmitter that should also emit the event.
- * @param {boolean} [once] - Share the event only once.
  * @returns {function} - The callback that has been applied to the target.
  */
 export function shareEvent(
     eventName: string,
     source: Emitter,
-    target: Emitter,
+    target: Emitter
 ): unknown {
     verifyEventEmitter(source, "source");
     verifyEventEmitter(target, "target");
@@ -103,9 +102,7 @@ export class Connection extends BetterEventEmitter {
     _parse(): void {
         while (true) {
             const i = this._message.indexOf("\n");
-            if (i === -1) {
-                break;
-            }
+            if (i === -1) break;
 
             const msg = this._message.substr(0, i);
             this._message = this._message.substr(i + 1);
@@ -126,9 +123,7 @@ export class Connection extends BetterEventEmitter {
      * @returns {boolean}
      */
     send(data: unknown): boolean {
-        if (this.isDead) {
-            return false;
-        }
+        if (this.isDead) return false;
 
         this.socket.write(JSON.stringify(data) + "\n");
         return true;
@@ -139,9 +134,7 @@ export class Connection extends BetterEventEmitter {
      * @returns {boolean}
      */
     close(): boolean {
-        if (this.isDead) {
-            return false;
-        }
+        if (this.isDead) return false;
 
         this.socket.end();
         return true;
@@ -172,9 +165,7 @@ export class RemoteEventEmitter extends Connection {
         this.on("message", (msg: BetterEventMessage) => {
             const { type } = msg;
 
-            if (type !== "event") {
-                return;
-            }
+            if (type !== "event") return;
 
             const { event, args } = msg;
 

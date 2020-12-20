@@ -6,7 +6,6 @@ import { EventEmitter } from "events";
  * @param {string} name  - The name of the variable.
  */
 export function verifyEventEmitter(value: unknown, name: string): void {
-    if (!(value && value instanceof EventEmitter)) {
+    if (!(value && value instanceof EventEmitter))
         throw new TypeError(name + " must be an instance of EventEmitter");
-    }
 }
