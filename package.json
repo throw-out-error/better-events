@@ -8,7 +8,7 @@
         "dist"
     ],
     "scripts": {
-        "test": "rimraf test-socket && rimraf coverage && nyc mocha",
+        "test": "del -f test-socket && del -f coverage && nyc mocha",
         "lint": "eslint src/**/* --fix",
         "build": "tsc",
         "deploy": "yarn publish --access=public",
@@ -45,13 +45,13 @@
         "@types/node": "^14.14.14",
         "@typescript-eslint/eslint-plugin": "4.10.0",
         "@typescript-eslint/parser": "4.10.0",
+        "del-cli": "^3.0.1",
         "eslint": "^7.16.0",
         "eslint-config-prettier": "^7.1.0",
         "eslint-plugin-prettier": "^3.3.0",
         "mocha": "^8.2.1",
         "nyc": "^15.1.0",
         "prettier": "^2.2.1",
-        "rimraf": "^3.0.2",
         "typescript": "4.1.3"
     },
     "dependencies": {
